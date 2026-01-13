@@ -21,12 +21,31 @@ export function OpportunitiesPage({
   const [year, setYear] = useState<string>('all');
   const [fieldOfInterest, setFieldOfInterest] = useState<string>('all');
   const [opportunityType, setOpportunityType] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const TRUSTED_SOURCES = ["Internshala", "Devpost", "Scholarships.com", "Govt Portal"];
 
   // Filter opportunities based on selected filters
   const filteredOpportunities = mockOpportunities.filter((opp: Opportunity) => {
+    // Basic Trusted Source Check
+    if (!TRUSTED_SOURCES.includes(opp.source)) return false;
+
+    // Remove expired opportunities (past deadline)
+    const now = new Date();
+    const deadline = new Date(opp.deadline);
+    if (deadline < now) return false;
+
     if (degree !== 'all' && opp.degree !== degree) return false;
     if (fieldOfInterest !== 'all' && opp.fieldOfInterest !== fieldOfInterest) return false;
     if (opportunityType !== 'all' && opp.type !== opportunityType) return false;
+
+    // Search Query Filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      return opp.title.toLowerCase().includes(query) || 
+             opp.eligibility.toLowerCase().includes(query);
+    }
+
     return true;
   });
 
@@ -38,6 +57,17 @@ export function OpportunitiesPage({
           <div className="flex items-center gap-2 mb-4">
             <Filter className="w-5 h-5 text-[#FFD700]" />
             <h2 className="text-[#FFD700] text-xl">Filter Opportunities</h2>
+          </div>
+
+          {/* Search Bar */}
+          <div className="mb-6">
+            <input
+              type="text"
+              placeholder="Search by title or eligibility (e.g., 'Google', 'Python')..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-black text-white border-2 border-[#FFD700] rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FFD700] placeholder-gray-500"
+            />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -53,22 +83,6 @@ export function OpportunitiesPage({
                 <option value="HS">High School</option>
                 <option value="BS">Bachelor's</option>
                 <option value="MS">Master's/PhD</option>
-              </select>
-            </div>
-
-            {/* Year Filter */}
-            <div>
-              <label className="text-white text-sm mb-2 block">Year</label>
-              <select
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                className="w-full bg-black text-white border-2 border-[#FFD700] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
-              >
-                <option value="all">All Years</option>
-                <option value="freshman">Freshman</option>
-                <option value="sophomore">Sophomore</option>
-                <option value="junior">Junior</option>
-                <option value="senior">Senior</option>
               </select>
             </div>
 
@@ -102,6 +116,22 @@ export function OpportunitiesPage({
                 <option value="Internship">Internship</option>
                 <option value="Grant">Grant</option>
                 <option value="Hackathon">Hackathon</option>
+              </select>
+            </div>
+
+            {/* Year Filter */}
+            <div>
+              <label className="text-white text-sm mb-2 block">Year (Mock)</label>
+              <select
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                className="w-full bg-black text-white border-2 border-[#FFD700] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
+              >
+                <option value="all">All Years</option>
+                <option value="freshman">Freshman</option>
+                <option value="sophomore">Sophomore</option>
+                <option value="junior">Junior</option>
+                <option value="senior">Senior</option>
               </select>
             </div>
           </div>

@@ -7,7 +7,7 @@ class OpportunityBase(BaseModel):
     type: str # internship / scholarship / hackathon / grant
     deadline: date
     source: str
-    apply_link: str
+    link: str
     eligibility: Optional[str] = None
 
 class OpportunityCreate(OpportunityBase):

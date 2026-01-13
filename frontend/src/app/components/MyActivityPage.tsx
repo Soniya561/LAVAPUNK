@@ -4,13 +4,28 @@ import { mockOpportunities } from '../data/mockOpportunities';
 
 interface MyActivityPageProps {
   userActivity: UserActivity;
+  onOpportunityView?: (id: string) => void;
 }
 
-export function MyActivityPage({ userActivity }: MyActivityPageProps) {
-  // Get opportunities by IDs
-  const viewedOpportunities = mockOpportunities.filter(o => userActivity.viewed.includes(o.id));
-  const appliedOpportunities = mockOpportunities.filter(o => userActivity.applied.includes(o.id));
-  const savedOpportunities = mockOpportunities.filter(o => userActivity.saved.includes(o.id));
+export function MyActivityPage({ userActivity, onOpportunityView }: MyActivityPageProps) {
+  const TRUSTED_SOURCES = ["Internshala", "Devpost", "Scholarships.com", "Govt Portal"];
+
+  const filterAvailable = (opps: any[]) => opps.filter(o => {
+    // Trusted Source Check
+    if (!TRUSTED_SOURCES.includes(o.source)) return false;
+
+    // Remove expired
+    const now = new Date();
+    const deadline = new Date(o.deadline);
+    if (deadline < now) return false;
+
+    return true;
+  });
+
+  // Get opportunities by IDs and filter by trust/expiry
+  const viewedOpportunities = filterAvailable(mockOpportunities.filter(o => userActivity.viewed.includes(o.id)));
+  const appliedOpportunities = filterAvailable(mockOpportunities.filter(o => userActivity.applied.includes(o.id)));
+  const savedOpportunities = filterAvailable(mockOpportunities.filter(o => userActivity.saved.includes(o.id)));
 
   const ActivityList = ({ opportunities, icon: Icon, title, emptyMessage }: any) => (
     <div className="bg-black border-2 border-[#FFD700] rounded-lg p-6 mb-6">
@@ -35,7 +50,8 @@ export function MyActivityPage({ userActivity }: MyActivityPageProps) {
             return (
               <div 
                 key={opp.id}
-                className="border-l-4 border-[#FFD700] pl-4 py-3 hover:bg-[#FFD700] hover:bg-opacity-5 transition-colors"
+                onClick={() => onOpportunityView?.(opp.id)}
+                className="border-l-4 border-[#FFD700] pl-4 py-3 hover:bg-[#FFD700] hover:bg-opacity-5 transition-colors cursor-pointer"
               >
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-white text-lg">{opp.title}</h3>
@@ -48,14 +64,22 @@ export function MyActivityPage({ userActivity }: MyActivityPageProps) {
                   <span className="text-gray-500 text-sm">
                     Deadline: <span className="text-white">{formattedDeadline}</span>
                   </span>
-                  <a
-                    href={opp.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const SOURCE_URLS: Record<string, string> = {
+                        "Internshala": "https://internshala.com/student/dashboard",
+                        "Devpost": "https://devpost.com/",
+                        "Scholarships.com": "https://www.scholarships.com/",
+                        "Govt Portal": "https://www.india.gov.in/my-government/schemes"
+                      };
+                      const targetUrl = SOURCE_URLS[opp.source] || opp.link;
+                      window.open(targetUrl, '_blank', 'noopener,noreferrer');
+                    }}
                     className="text-[#FFD700] hover:text-[#FFC700] text-sm flex items-center gap-1"
                   >
                     View <ExternalLink className="w-3 h-3" />
-                  </a>
+                  </button>
                 </div>
               </div>
             );

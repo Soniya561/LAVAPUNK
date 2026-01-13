@@ -52,11 +52,21 @@ export function SmartRecommendationsPage({
 
   const profile = user.profile;
 
+  const TRUSTED_SOURCES = ["Internshala", "Devpost", "Scholarships.com", "Govt Portal"];
+
   // Smart matching algorithm
   const getRecommendations = (): RecommendedOpportunity[] => {
     const recommendations: RecommendedOpportunity[] = [];
 
     mockOpportunities.forEach(opp => {
+      // Filter out untrusted sources
+      if (!TRUSTED_SOURCES.includes(opp.source)) return;
+
+      // Filter out expired opportunities
+      const now = new Date();
+      const deadline = new Date(opp.deadline);
+      if (deadline < now) return;
+
       const reasons: string[] = [];
       let score = 0;
 

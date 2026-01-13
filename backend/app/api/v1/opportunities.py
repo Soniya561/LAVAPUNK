@@ -9,7 +9,13 @@ from app.db.models.user import User
 
 router = APIRouter()
 
-TRUSTED_SOURCES = ["Internshala", "Devpost", "Scholarships.com", "HackerEarth"]
+TRUSTED_MAPPING = {
+    "internship": "Internshala",
+    "hackathon": "Devpost",
+    "scholarship": "Scholarships.com",
+    "grant": "Govt Portal"
+}
+TRUSTED_SOURCES = list(TRUSTED_MAPPING.values())
 
 @router.get("/", response_model=List[Opportunity])
 def read_opportunities(
@@ -18,7 +24,8 @@ def read_opportunities(
     month: Optional[int] = None,
     db: Session = Depends(get_db)
 ):
-    return crud_opportunity.get_opportunities(db, type=type, interest=interest, month=month)
+    opportunities = crud_opportunity.get_opportunities(db, type=type, interest=interest, month=month)
+    return [o for o in opportunities if o.source in TRUSTED_SOURCES]
 
 @router.post("/", response_model=Opportunity)
 def create_opportunity(
@@ -27,10 +34,11 @@ def create_opportunity(
     opportunity_in: OpportunityCreate,
     current_user: User = Depends(deps.get_current_user)
 ):
-    if opportunity_in.source not in TRUSTED_SOURCES:
+    expected_source = TRUSTED_MAPPING.get(opportunity_in.type.lower())
+    if not expected_source or opportunity_in.source != expected_source:
         raise HTTPException(
             status_code=400, 
-            detail=f"Untrusted source. Allowed: {', '.join(TRUSTED_SOURCES)}"
+            detail=f"Invalid source for {opportunity_in.type}. Expected: {expected_source}"
         )
     return crud_opportunity.create_opportunity(db, obj_in=opportunity_in)
 

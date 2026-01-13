@@ -52,7 +52,16 @@ export function OpportunityCard({
     if (onApply) {
       onApply(opportunity.id);
     }
-    window.open(opportunity.link, '_blank', 'noopener,noreferrer');
+    
+    const SOURCE_URLS: Record<string, string> = {
+      "Internshala": "https://internshala.com/student/dashboard",
+      "Devpost": "https://devpost.com/",
+      "Scholarships.com": "https://www.scholarships.com/",
+      "Govt Portal": "https://www.india.gov.in/my-government/schemes"
+    };
+
+    const targetUrl = SOURCE_URLS[opportunity.source] || opportunity.link;
+    window.open(targetUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleSaveClick = (e: React.MouseEvent) => {

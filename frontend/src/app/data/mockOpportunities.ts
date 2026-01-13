@@ -18,8 +18,8 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Internship',
     deadline: '2026-01-13T23:59:59Z',
     eligibility: 'Open to all students, 18+ years old',
-    link: 'https://summerofcode.withgoogle.com',
-    source: 'Google Careers',
+    link: 'https://internshala.com/internship/details/google-summer-of-code',
+    source: 'Internshala',
     degree: 'BS',
     fieldOfInterest: 'Tech'
   },
@@ -29,7 +29,7 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Scholarship',
     deadline: '2026-01-15T23:59:59Z',
     eligibility: 'High school seniors with PSAT scores',
-    link: 'https://www.nationalmerit.org',
+    link: 'https://www.scholarships.com/financial-aid/college-scholarships/scholarships-by-type/academic-scholarships/national-merit-scholarship/',
     source: 'Scholarships.com',
     degree: 'HS',
     fieldOfInterest: 'General'
@@ -40,76 +40,10 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Internship',
     deadline: '2026-02-01T23:59:59Z',
     eligibility: 'CS/EE students, PhD preferred',
-    link: 'https://www.microsoft.com/research',
+    link: 'https://internshala.com/internships/microsoft-internship',
     source: 'Internshala',
     degree: 'MS',
     fieldOfInterest: 'Tech'
-  },
-  {
-    id: '4',
-    title: 'Fulbright Scholarship Program',
-    type: 'Scholarship',
-    deadline: '2026-03-15T23:59:59Z',
-    eligibility: 'Graduate students, US citizens',
-    link: 'https://us.fulbrightonline.org',
-    source: 'Scholarships360',
-    degree: 'MS',
-    fieldOfInterest: 'Research'
-  },
-  {
-    id: '5',
-    title: 'Goldman Sachs Summer Analyst',
-    type: 'Internship',
-    deadline: '2026-01-20T23:59:59Z',
-    eligibility: 'Undergraduate juniors, Finance/Economics major',
-    link: 'https://www.goldmansachs.com/careers',
-    source: 'WayUp',
-    degree: 'BS',
-    fieldOfInterest: 'Finance'
-  },
-  {
-    id: '6',
-    title: 'NSF Graduate Research Fellowship',
-    type: 'Grant',
-    deadline: '2026-01-14T23:59:59Z',
-    eligibility: 'Graduate students in STEM fields',
-    link: 'https://www.nsfgrfp.org',
-    source: 'Grants.gov',
-    degree: 'MS',
-    fieldOfInterest: 'Research'
-  },
-  {
-    id: '7',
-    title: 'Meta AI Research Residency',
-    type: 'Internship',
-    deadline: '2026-02-10T23:59:59Z',
-    eligibility: 'Recent graduates with ML/AI experience',
-    link: 'https://ai.facebook.com/research',
-    source: 'Internshala',
-    degree: 'MS',
-    fieldOfInterest: 'Tech'
-  },
-  {
-    id: '8',
-    title: 'Gates Millennium Scholarship',
-    type: 'Scholarship',
-    deadline: '2026-01-12T23:59:59Z',
-    eligibility: 'Minority students, outstanding academic record',
-    link: 'https://www.gmsp.org',
-    source: 'Fastweb',
-    degree: 'BS',
-    fieldOfInterest: 'General'
-  },
-  {
-    id: '9',
-    title: 'McKinsey Business Analyst Internship',
-    type: 'Internship',
-    deadline: '2026-01-25T23:59:59Z',
-    eligibility: 'Undergraduate students, all majors',
-    link: 'https://www.mckinsey.com/careers',
-    source: 'LinkedIn',
-    degree: 'BS',
-    fieldOfInterest: 'Finance'
   },
   {
     id: '10',
@@ -117,32 +51,10 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Scholarship',
     deadline: '2026-03-01T23:59:59Z',
     eligibility: 'Outstanding academic achievement, leadership',
-    link: 'https://www.rhodeshouse.ox.ac.uk',
+    link: 'https://www.scholarships.com/financial-aid/college-scholarships/scholarships-by-type/academic-scholarships/rhodes-scholarship/',
     source: 'Scholarships.com',
     degree: 'MS',
     fieldOfInterest: 'Research'
-  },
-  {
-    id: '11',
-    title: 'NASA Pathways Internship',
-    type: 'Internship',
-    deadline: '2026-02-15T23:59:59Z',
-    eligibility: 'STEM students, US citizenship required',
-    link: 'https://www.nasa.gov/careers',
-    source: 'USAJobs',
-    degree: 'BS',
-    fieldOfInterest: 'Tech'
-  },
-  {
-    id: '12',
-    title: 'Coca-Cola Scholars Program',
-    type: 'Scholarship',
-    deadline: '2026-01-18T23:59:59Z',
-    eligibility: 'High school seniors, community involvement',
-    link: 'https://www.coca-colascholarsfoundation.org',
-    source: 'Fastweb',
-    degree: 'HS',
-    fieldOfInterest: 'General'
   },
   {
     id: '13',
@@ -150,7 +62,7 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Hackathon',
     deadline: '2026-01-16T23:59:59Z',
     eligibility: 'Students worldwide, all skill levels',
-    link: 'https://mlh.io',
+    link: 'https://devpost.com/hackathons',
     source: 'Devpost',
     degree: 'BS',
     fieldOfInterest: 'Tech'
@@ -161,32 +73,10 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Hackathon',
     deadline: '2026-01-22T23:59:59Z',
     eligibility: 'Blockchain enthusiasts, all backgrounds',
-    link: 'https://ethglobal.com',
+    link: 'https://devpost.com/hackathons/ethglobal',
     source: 'Devpost',
     degree: 'BS',
     fieldOfInterest: 'Tech'
-  },
-  {
-    id: '15',
-    title: 'Harvard Innovation Challenge',
-    type: 'Hackathon',
-    deadline: '2026-02-05T23:59:59Z',
-    eligibility: 'College students with entrepreneurial ideas',
-    link: 'https://www.i-lab.harvard.edu',
-    source: 'HackerEarth',
-    degree: 'BS',
-    fieldOfInterest: 'Design'
-  },
-  {
-    id: '16',
-    title: 'NIH Research Grant Program',
-    type: 'Grant',
-    deadline: '2026-03-20T23:59:59Z',
-    eligibility: 'Graduate students in biomedical research',
-    link: 'https://www.nih.gov',
-    source: 'Grants.gov',
-    degree: 'MS',
-    fieldOfInterest: 'Research'
   },
   {
     id: '17',
@@ -194,32 +84,10 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Hackathon',
     deadline: '2026-01-28T23:59:59Z',
     eligibility: 'Students with design and creative skills, Figma or Adobe experience',
-    link: 'https://www.adobe.com/challenges',
+    link: 'https://devpost.com/hackathons/adobe-creative-challenge',
     source: 'Devpost',
     degree: 'BS',
     fieldOfInterest: 'Design'
-  },
-  {
-    id: '18',
-    title: 'Merit-Based National Scholarship',
-    type: 'Scholarship',
-    deadline: '2026-02-20T23:59:59Z',
-    eligibility: 'Students with 85%+ academic performance',
-    link: 'https://www.nationalscholarship.org',
-    source: 'Scholarships360',
-    degree: 'BS',
-    fieldOfInterest: 'General'
-  },
-  {
-    id: '19',
-    title: 'Python Data Science Bootcamp Grant',
-    type: 'Grant',
-    deadline: '2026-02-28T23:59:59Z',
-    eligibility: 'Students interested in Python, Data Analysis, and Machine Learning',
-    link: 'https://www.datasciencegrant.org',
-    source: 'Grants.gov',
-    degree: 'BS',
-    fieldOfInterest: 'Tech'
   },
   {
     id: '20',
@@ -227,9 +95,119 @@ export const mockOpportunities: Opportunity[] = [
     type: 'Internship',
     deadline: '2026-01-19T23:59:59Z',
     eligibility: 'Computer Science students with Java, Python or C++ skills',
-    link: 'https://www.jpmorgan.com/careers',
+    link: 'https://internshala.com/internship/details/jp-morgan-tech-internship',
     source: 'Internshala',
     degree: 'BS',
     fieldOfInterest: 'Finance'
+  },
+  {
+    id: '21',
+    title: 'Government STEM Research Grant',
+    type: 'Grant',
+    deadline: '2026-03-15T23:59:59Z',
+    eligibility: 'Research scholars in STEM fields',
+    link: 'https://www.india.gov.in/my-government/schemes',
+    source: 'Govt Portal',
+    degree: 'MS',
+    fieldOfInterest: 'Research'
+  },
+  {
+    id: '22',
+    title: 'Summer Tech Internship 2026',
+    type: 'Internship',
+    deadline: '2026-05-20T23:59:59Z',
+    eligibility: 'CS/IT Students',
+    link: 'https://internshala.com/internships/tech-internship',
+    source: 'Internshala',
+    degree: 'BS',
+    fieldOfInterest: 'Tech'
+  },
+  {
+    id: '23',
+    title: 'Global Hackathon Series',
+    type: 'Hackathon',
+    deadline: '2026-06-15T23:59:59Z',
+    eligibility: 'All Developers',
+    link: 'https://devpost.com/hackathons/global',
+    source: 'Devpost',
+    degree: 'BS',
+    fieldOfInterest: 'Tech'
+  },
+  {
+    id: '24',
+    title: 'Annual Merit Scholarship',
+    type: 'Scholarship',
+    deadline: '2026-08-30T23:59:59Z',
+    eligibility: 'Academic Excellence',
+    link: 'https://www.scholarships.com/scholarships',
+    source: 'Scholarships.com',
+    degree: 'BS',
+    fieldOfInterest: 'General'
+  },
+  {
+    id: '25',
+    title: 'Fall Internship Program',
+    type: 'Internship',
+    deadline: '2026-09-15T23:59:59Z',
+    eligibility: 'Final Year Students',
+    link: 'https://internshala.com/internships',
+    source: 'Internshala',
+    degree: 'BS',
+    fieldOfInterest: 'Finance'
+  },
+  {
+    id: '26',
+    title: 'Winter Innovation Grant',
+    type: 'Grant',
+    deadline: '2026-12-01T23:59:59Z',
+    eligibility: 'Innovative Projects',
+    link: 'https://www.india.gov.in/my-government/schemes',
+    source: 'Govt Portal',
+    degree: 'MS',
+    fieldOfInterest: 'Design'
+  },
+  {
+    id: '27',
+    title: 'Spring Tech Symposium',
+    type: 'Hackathon',
+    deadline: '2026-04-15T23:59:59Z',
+    eligibility: 'All students interested in AI',
+    link: 'https://devpost.com/hackathons',
+    source: 'Devpost',
+    degree: 'BS',
+    fieldOfInterest: 'Tech'
+  },
+  {
+    id: '28',
+    title: 'Global Leaders Internship',
+    type: 'Internship',
+    deadline: '2026-07-10T23:59:59Z',
+    eligibility: 'Undergraduates with leadership potential',
+    link: 'https://internshala.com/internships',
+    source: 'Internshala',
+    degree: 'BS',
+    fieldOfInterest: 'Management'
+  },
+  {
+    id: '29',
+    title: 'Future Innovators Scholarship',
+    type: 'Scholarship',
+    deadline: '2026-10-25T23:59:59Z',
+    eligibility: 'High performing students in STEM',
+    link: 'https://www.scholarships.com/scholarships',
+    source: 'Scholarships.com',
+    degree: 'BS',
+    fieldOfInterest: 'Tech'
+  },
+  {
+    id: '30',
+    title: 'Autumn Research Fellowship',
+    type: 'Grant',
+    deadline: '2026-11-15T23:59:59Z',
+    eligibility: 'Post-graduate researchers',
+    link: 'https://www.india.gov.in/my-government/schemes',
+    source: 'Govt Portal',
+    degree: 'MS',
+    fieldOfInterest: 'Research'
   }
-];
+];;

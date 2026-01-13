@@ -185,11 +185,17 @@ export default function App() {
       )}
 
       {currentPage === 'dashboard' && user && (
-        <DashboardPage />
+        <DashboardPage 
+          onOpportunityView={handleOpportunityView}
+          onOpportunityApply={handleOpportunityApply}
+        />
       )}
 
       {currentPage === 'activity' && user && (
-        <MyActivityPage userActivity={userActivity} />
+        <MyActivityPage 
+          userActivity={userActivity} 
+          onOpportunityView={handleOpportunityView}
+        />
       )}
 
       {/* Modals */}

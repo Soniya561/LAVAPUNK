@@ -1,16 +1,35 @@
 import { TrendingUp, Briefcase, Award, Trophy, Sparkles, Code } from 'lucide-react';
 import { mockOpportunities } from '../data/mockOpportunities';
 
-export function DashboardPage() {
-  // Calculate statistics
-  const totalOpportunities = mockOpportunities.length;
-  const internships = mockOpportunities.filter(o => o.type === 'Internship').length;
-  const scholarships = mockOpportunities.filter(o => o.type === 'Scholarship').length;
-  const grants = mockOpportunities.filter(o => o.type === 'Grant').length;
-  const hackathons = mockOpportunities.filter(o => o.type === 'Hackathon').length;
+interface DashboardPageProps {
+  onOpportunityView?: (id: string) => void;
+  onOpportunityApply?: (id: string) => void;
+}
+
+export function DashboardPage({ onOpportunityView, onOpportunityApply }: DashboardPageProps) {
+  const TRUSTED_SOURCES = ["Internshala", "Devpost", "Scholarships.com", "Govt Portal"];
+
+  // Filter available opportunities
+  const availableOpportunities = mockOpportunities.filter(opp => {
+    // Trusted Source Check
+    if (!TRUSTED_SOURCES.includes(opp.source)) return false;
+
+    // Remove expired
+    const now = new Date();
+    const deadline = new Date(opp.deadline);
+    if (deadline < now) return false;
+
+    return true;
+  });
+
+  const totalOpportunities = availableOpportunities.length;
+  const internships = availableOpportunities.filter(o => o.type === 'Internship').length;
+  const scholarships = availableOpportunities.filter(o => o.type === 'Scholarship').length;
+  const grants = availableOpportunities.filter(o => o.type === 'Grant').length;
+  const hackathons = availableOpportunities.filter(o => o.type === 'Hackathon').length;
 
   // Get recently added opportunities (last 5)
-  const recentlyAdded = mockOpportunities.slice(0, 5);
+  const recentlyAdded = availableOpportunities.slice(0, 5);
 
   return (
     <div className="min-h-screen bg-black pt-20 px-6 py-8">
@@ -98,21 +117,42 @@ export function DashboardPage() {
               return (
                 <div 
                   key={opportunity.id}
-                  className="border-l-4 border-[#FFD700] pl-4 py-2 hover:bg-[#FFD700] hover:bg-opacity-5 transition-colors"
+                  onClick={() => onOpportunityView?.(opportunity.id)}
+                  className="border-l-4 border-[#FFD700] pl-4 py-2 hover:bg-[#FFD700] hover:bg-opacity-5 transition-colors flex justify-between items-center cursor-pointer"
                 >
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-white text-lg">{opportunity.title}</h3>
-                    <span className="bg-[#FFD700] text-black px-3 py-1 rounded-full text-xs whitespace-nowrap ml-4">
-                      {opportunity.type}
-                    </span>
+                  <div className="flex-1">
+                    <div className="flex justify-between items-start mb-2 mr-4">
+                      <h3 className="text-white text-lg">{opportunity.title}</h3>
+                      <span className="bg-[#FFD700] text-black px-3 py-1 rounded-full text-xs whitespace-nowrap ml-4">
+                        {opportunity.type}
+                      </span>
+                    </div>
+                    <p className="text-gray-400 text-sm mb-2">{opportunity.eligibility}</p>
+                    <div className="flex items-center gap-4 text-sm">
+                      <span className="text-gray-500">Deadline: <span className="text-white">{formattedDeadline}</span></span>
+                      {opportunity.fieldOfInterest && (
+                        <span className="text-gray-500">Field: <span className="text-[#FFD700]">{opportunity.fieldOfInterest}</span></span>
+                      )}
+                      <span className="text-gray-500">Source: <span className="text-[#FFD700]">{opportunity.source}</span></span>
+                    </div>
                   </div>
-                  <p className="text-gray-400 text-sm mb-2">{opportunity.eligibility}</p>
-                  <div className="flex items-center gap-4 text-sm">
-                    <span className="text-gray-500">Deadline: <span className="text-white">{formattedDeadline}</span></span>
-                    {opportunity.fieldOfInterest && (
-                      <span className="text-gray-500">Field: <span className="text-[#FFD700]">{opportunity.fieldOfInterest}</span></span>
-                    )}
-                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpportunityApply?.(opportunity.id);
+                      const SOURCE_URLS: Record<string, string> = {
+                        "Internshala": "https://internshala.com/student/dashboard",
+                        "Devpost": "https://devpost.com/",
+                        "Scholarships.com": "https://www.scholarships.com/",
+                        "Govt Portal": "https://www.india.gov.in/my-government/schemes"
+                      };
+                      const targetUrl = SOURCE_URLS[opportunity.source] || opportunity.link;
+                      window.open(targetUrl, '_blank', 'noopener,noreferrer');
+                    }}
+                    className="bg-[#FFD700] text-black px-4 py-2 rounded-md hover:bg-[#FFC700] transition-colors text-sm font-medium"
+                  >
+                    Apply Now
+                  </button>
                 </div>
               );
             })}

@@ -9,5 +9,5 @@ class Opportunity(Base):
     type = Column(String, index=True) # internship / scholarship / hackathon / grant
     deadline = Column(Date)
     source = Column(String)
-    apply_link = Column(String)
+    link = Column(String)
     eligibility = Column(String)
