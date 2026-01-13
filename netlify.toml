@@ -1,24 +1,17 @@
 # netlify.toml for LAVAPUNK project
 
 [build]
-  # Directory where Netlify will run commands
   base = "frontend"
-  
-  # Command to build your project
   command = "npm run build"
-  
-  # Directory to publish after build
-  publish = "frontend/dist"
+  publish = "dist"
 
-# Environment variables (replace with your actual secrets)
 [build.environment]
   NODE_VERSION = "18"
   REACT_APP_API_URL = "https://api.example.com"
-  EXAMPLE_NAME = "I9JU23NF394R6HH"
   NODE_ENV = "production"
 
-# Redirect all routes to index.html for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
